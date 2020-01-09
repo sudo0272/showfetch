@@ -7,4 +7,6 @@ struct lsbReleaseStruct {
     char codename[17];
 };
 
+int getLsbRelease(struct lsbReleaseStruct *);
+
 #endif
