@@ -35,12 +35,8 @@ int getLsbRelease(struct lsbReleaseStruct *target) {
     char *variable;
     char *value;
     unsigned int bufferStringLength;
+    unsigned int variableLength;
     int i;
-
-    // initialize target
-    *target->codename = NULL;
-    *target->id = NULL;
-    *target->release = NULL;
 
     fp = fopen("/etc/lsb-release", "r");
 
@@ -48,35 +44,37 @@ int getLsbRelease(struct lsbReleaseStruct *target) {
         return errno;
     }
 
-    while ((fgets(buffer, 129, fp)) != EOF) {
+    printf("called...\n");
+
+    while (fgets(buffer, 129, fp) != NULL) {
+        printf("== %s\n", buffer);
+
         bufferStringLength = strlen(buffer);
 
-        variable = buffer;
+        printf("%d %s", bufferStringLength, buffer);
 
-        for (i = 0; i < bufferStringLength - 1; i++) {
-            if (buffer[i + 1] == '=') {
-                buffer[i] = '\0';
+        variable = strtok(buffer, "=");
 
-                break;
-            }
-        }
+        variableLength = strlen(variable);
 
-        if (i + 2 < bufferStringLength) {
-            value = i + 2;
+        printf("-- %s\n", variable);
 
+        if (variableLength < bufferStringLength) {
+            value = strtok(&buffer[variableLength + 1], "\n");
+            printf("value: %s\n", value);
             if (!strcmp(variable, "DISTRIB_ID")) {
-                *target->id = value;
+                strcpy(target->id, value);
             } else if (!strcmp(variable, "DISTRIB_RELEASE")) {
-                *target->release = value;
+                strcpy(target->release, value);
             } else if (!strcmp(variable, "DISTRIB_CODENAME")) {
-                *target->release = value;
+                strcpy(target->codename, value);
             }
         } else {
-            errno = EPIPE;
+            errno = ESPIPE;
 
-            return -1;
+            break;
         }
     }
 
-    return 0;
+    return errno;
 }
