@@ -28,6 +28,7 @@ SOFTWARE.
 #include <string.h>
 #include <sys/utsname.h>
 #include "../lib/lsb_release.h"
+#include "../lib/uptime.h"
 
 #define USERNAME_MAX 32
 #define HOSTNAME_MAX 64
@@ -44,6 +45,7 @@ int main() {
 
     struct utsname systemNameInformaton;
     struct lsbReleaseStruct lsbRelease;
+    struct uptimeStructure uptime;
 
     if (getlogin_r(username, sizeof(username))) { // if getting username has been failed
         printf("Getting username has been failed\n");
@@ -73,6 +75,13 @@ int main() {
         return errno;
     }
 
+    if (getUptime(&uptime)) {
+        printf("Getting uptime has been failed\n");
+        printf("ERRNO %d: %s\n", errno, strerror(errno));
+
+        return errno;
+    }
+
     printf("%s\n", username);
     printf("%s\n", hostname);
     printf("%s\n", systemNameInformaton.machine);
@@ -81,6 +90,7 @@ int main() {
     printf("%s\n", lsbRelease.codename);
     printf("%s\n", lsbRelease.id);
     printf("%s\n", lsbRelease.release);
+    printf("%u:%u:%u:%u\n", uptime.days, uptime.hours, uptime.minutes, uptime.seconds);
 
     return 0;
 }
