@@ -22,16 +22,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef _UPTIME_H_
-#define _UPTIME_H_
+#include "uptime.h"
+#include <stdio.h>
+#include <errno.h>
 
-struct uptimeStructure {
-    unsigned int days;
-    unsigned int hours;
-    unsigned int minutes;
-    unsigned int seconds;
-};
+extern int errno;
 
-int getUptime(struct uptimeStructure *);
+int getUptime(struct uptimeStructure *target) {
+    unsigned int total;
 
-#endif
+    // initialize structure
+    target->days = 0;
+    target->hours = 0;
+    target->minutes = 0;
+    target->seconds = 0;
+
+    FILE *fp;
+
+    fp = fopen("/proc/uptime", "r");
+
+    if (errno != 0) {
+        return errno;
+    }
+
+    fscanf(fp, "%u", &total);
+    printf("%u", total);
+    
+    target->days = total / 60 / 60 / 24;
+    target->hours = total / 60 / 60 - target->days * 24;
+    target->minutes = total / 60 - target->hours * 60 - target->days * 60 * 24;
+    target->seconds = total - target->minutes * 60 - target->hours * 60 * 60 - target->days * 60 * 60 * 24;
+
+    return errno;
+}
