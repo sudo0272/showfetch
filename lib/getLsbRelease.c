@@ -68,5 +68,7 @@ int getLsbRelease(struct lsbReleaseStruct *target) {
         }
     }
 
+    fclose(fp);
+
     return errno;
 }
