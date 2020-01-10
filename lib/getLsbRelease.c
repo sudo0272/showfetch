@@ -44,24 +44,16 @@ int getLsbRelease(struct lsbReleaseStruct *target) {
         return errno;
     }
 
-    printf("called...\n");
-
     while (fgets(buffer, 129, fp) != NULL) {
-        printf("== %s\n", buffer);
-
         bufferStringLength = strlen(buffer);
-
-        printf("%d %s", bufferStringLength, buffer);
 
         variable = strtok(buffer, "=");
 
         variableLength = strlen(variable);
 
-        printf("-- %s\n", variable);
-
         if (variableLength < bufferStringLength) {
             value = strtok(&buffer[variableLength + 1], "\n");
-            printf("value: %s\n", value);
+
             if (!strcmp(variable, "DISTRIB_ID")) {
                 strcpy(target->id, value);
             } else if (!strcmp(variable, "DISTRIB_RELEASE")) {
