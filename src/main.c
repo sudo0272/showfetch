@@ -42,6 +42,7 @@ int main() {
     char username[USERNAME_MAX + 1];
     char hostname[HOSTNAME_MAX + 1];
     char icon[ICON_HEIGHT][ICON_WIDTH + 1];
+    char os[33];
 
     int i;
 
@@ -95,20 +96,26 @@ int main() {
         strcpy(icon[7], "#####  ######  #####");
         strcpy(icon[8], "#####  ######  #####");
         strcpy(icon[9], "#####  ######  #####");
+
+        strcpy(os, "Manjaro Linux");
     }
 
-    printf("%s\n", username);
-    printf("%s\n", hostname);
-    printf("%s\n", systemNameInformaton.machine);
-    printf("%s\n", systemNameInformaton.release);
-    printf("%s\n", systemNameInformaton.sysname);
-    printf("%s\n", lsbRelease.codename);
-    printf("%s\n", lsbRelease.id);
-    printf("%s\n", lsbRelease.release);
-    printf("%u:%u:%u:%u\n", uptime.days, uptime.hours, uptime.minutes, uptime.seconds);
-    for (i = 0; i < ICON_HEIGHT; i++) {
-        printf("%s\n", icon[i]);
+    printf("%s    %s@%s\n", icon[0], username, hostname);
+    printf("%s   ", icon[1]);
+    for (i = strlen(username) + 1 + strlen(hostname) + 2; i != 0; i--) {
+        //       username       @       hostname   front and end
+        putchar('-');
     }
-
+    putchar('\n');
+    
+    printf("%s    OS      | %s %s ( %s ) %s\n", icon[2], os, lsbRelease.release, lsbRelease.codename, systemNameInformaton.machine);
+    printf("%s    OS Type | %s\n", icon[3], systemNameInformaton.sysname);
+    printf("%s    Kernel  | %s\n", icon[4], systemNameInformaton.release);
+    printf("%s    %s\n", icon[5]);
+    printf("%s    %s\n", icon[6]);
+    printf("%s    %s\n", icon[7]);
+    printf("%s    %s\n", icon[8]);
+    printf("%s    Uptime  | %u day%s, %u hour%s, %u minute%s, %u second%s\n", icon[9], uptime.days, uptime.days > 1 ? "s" : "", uptime.hours, uptime.hours > 1 ? "s" : "", uptime.minutes, uptime.minutes > 1 ? "s" : "", uptime.seconds, uptime.seconds > 1 ? "s" : "");
+    
     return 0;
 }
