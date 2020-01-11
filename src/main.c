@@ -33,8 +33,8 @@ SOFTWARE.
 #define USERNAME_MAX 32
 #define HOSTNAME_MAX 64
 
-#define ICON_WIDTH 40
-#define ICON_HEIGHT 20
+#define ICON_WIDTH 20
+#define ICON_HEIGHT 10
 
 extern int errno;
 
@@ -42,6 +42,8 @@ int main() {
     char username[USERNAME_MAX + 1];
     char hostname[HOSTNAME_MAX + 1];
     char icon[ICON_HEIGHT][ICON_WIDTH + 1];
+
+    int i;
 
     struct utsname systemNameInformaton;
     struct lsbReleaseStruct lsbRelease;
@@ -82,6 +84,19 @@ int main() {
         return errno;
     }
 
+    if (!strcmp(lsbRelease.id, "ManjaroLinux")) {
+        strcpy(icon[0], "#############  #####");
+        strcpy(icon[1], "#############  #####");
+        strcpy(icon[2], "#############  #####");
+        strcpy(icon[3], "#####          #####");
+        strcpy(icon[4], "#####  ######  #####");
+        strcpy(icon[5], "#####  ######  #####");
+        strcpy(icon[6], "#####  ######  #####");
+        strcpy(icon[7], "#####  ######  #####");
+        strcpy(icon[8], "#####  ######  #####");
+        strcpy(icon[9], "#####  ######  #####");
+    }
+
     printf("%s\n", username);
     printf("%s\n", hostname);
     printf("%s\n", systemNameInformaton.machine);
@@ -91,6 +106,9 @@ int main() {
     printf("%s\n", lsbRelease.id);
     printf("%s\n", lsbRelease.release);
     printf("%u:%u:%u:%u\n", uptime.days, uptime.hours, uptime.minutes, uptime.seconds);
+    for (i = 0; i < ICON_HEIGHT; i++) {
+        printf("%s\n", icon[i]);
+    }
 
     return 0;
 }
