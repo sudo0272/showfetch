@@ -46,7 +46,6 @@ int getUptime(struct uptimeStructure *target) {
     }
 
     fscanf(fp, "%u", &total);
-    printf("%u", total);
     
     target->days = total / 60 / 60 / 24;
     target->hours = total / 60 / 60 - target->days * 24;
