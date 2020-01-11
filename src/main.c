@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
@@ -107,11 +108,11 @@ int main() {
         putchar('-');
     }
     putchar('\n');
-    
+
     printf("%s    OS      | %s %s ( %s ) %s\n", icon[2], os, lsbRelease.release, lsbRelease.codename, systemNameInformaton.machine);
     printf("%s    OS Type | %s\n", icon[3], systemNameInformaton.sysname);
     printf("%s    Kernel  | %s\n", icon[4], systemNameInformaton.release);
-    printf("%s    %s\n", icon[5]);
+    printf("%s    Shell   | %s\n", icon[5], getenv("SHELL"));
     printf("%s    %s\n", icon[6]);
     printf("%s    %s\n", icon[7]);
     printf("%s    %s\n", icon[8]);
