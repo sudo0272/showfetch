@@ -27,6 +27,7 @@ SOFTWARE.
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
+#include <time.h>
 #include <sys/utsname.h>
 #include "../lib/lsb_release.h"
 #include "../lib/uptime.h"
@@ -44,12 +45,16 @@ int main() {
     char hostname[HOSTNAME_MAX + 1];
     char icon[ICON_HEIGHT][ICON_WIDTH + 1];
     char os[33];
+    char date[30];
+    // %Y-%m-%d %A %H:%M:%S
 
     int i;
 
     struct utsname systemNameInformaton;
     struct lsbReleaseStruct lsbRelease;
     struct uptimeStructure uptime;
+    struct tm *currentTime;
+    time_t rawTime;
 
     if (getlogin_r(username, sizeof(username))) { // if getting username has been failed
         printf("Getting username has been failed\n");
@@ -86,6 +91,23 @@ int main() {
         return errno;
     }
 
+    time(&rawTime);
+    if (rawTime == NULL) {
+        printf("Getting raw time has been failed\n");
+        printf("ERRNO %d: %s\n", errno, strerror(errno));
+
+        return errno;
+    }
+
+   currentTime = localtime(&rawTime);
+
+    if (strftime(date, 30, "%Y-%m-%d %A %H:%M:%S", currentTime) == 0) {
+        printf("Getting formatting time has been failed\n");
+        printf("ERRNO %d: %s\n", errno, strerror(errno));
+
+        return errno;
+    }
+
     if (!strcmp(lsbRelease.id, "ManjaroLinux")) {
         strcpy(icon[0], "#############  #####");
         strcpy(icon[1], "#############  #####");
@@ -115,7 +137,7 @@ int main() {
     printf("%s    Shell   | %s\n", icon[5], getenv("SHELL"));
     printf("%s    Home    | %s\n", icon[6], getenv("HOME"));
     printf("%s    %s\n", icon[7]);
-    printf("%s    %s\n", icon[8]);
+    printf("%s    Time    | %s\n", icon[8], date);
     printf("%s    Uptime  | %u day%s, %u hour%s, %u minute%s, %u second%s\n", icon[9], uptime.days, uptime.days > 1 ? "s" : "", uptime.hours, uptime.hours > 1 ? "s" : "", uptime.minutes, uptime.minutes > 1 ? "s" : "", uptime.seconds, uptime.seconds > 1 ? "s" : "");
     
     return 0;
