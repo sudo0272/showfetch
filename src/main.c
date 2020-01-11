@@ -113,7 +113,7 @@ int main() {
     printf("%s    OS Type | %s\n", icon[3], systemNameInformaton.sysname);
     printf("%s    Kernel  | %s\n", icon[4], systemNameInformaton.release);
     printf("%s    Shell   | %s\n", icon[5], getenv("SHELL"));
-    printf("%s    %s\n", icon[6]);
+    printf("%s    Home    | %s\n", icon[6], getenv("HOME"));
     printf("%s    %s\n", icon[7]);
     printf("%s    %s\n", icon[8]);
     printf("%s    Uptime  | %u day%s, %u hour%s, %u minute%s, %u second%s\n", icon[9], uptime.days, uptime.days > 1 ? "s" : "", uptime.hours, uptime.hours > 1 ? "s" : "", uptime.minutes, uptime.minutes > 1 ? "s" : "", uptime.seconds, uptime.seconds > 1 ? "s" : "");
