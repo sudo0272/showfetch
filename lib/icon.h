@@ -36,7 +36,8 @@ enum colorEnum {
     YELLOW,
     BLUE,
     MAGENTA,
-    CYAN
+    CYAN,
+    WHITE
 };
 
 struct iconStructure {
