@@ -111,6 +111,14 @@ int main() {
         return errno;
     }
 
+    // initialize color and thickness
+    for (i = 0; i < ICON_HEIGHT; i++) {
+        for (j = 0; j < ICON_WIDTH; j++) {
+            icon[i][j].color = BLACK;
+            icon[i][j].thickness = BOLD;
+        }
+    }
+
     if (!strcmp(lsbRelease.id, "ManjaroLinux")) {
         setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
         setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
@@ -134,6 +142,34 @@ int main() {
         strcpy(os, "Manjaro Linux");
 
         symbolColor = GREEN;
+    } else {
+        //                            0123456789ABCDEFGHIJ
+        setIconCharacterRow(icon[0], "        ####       ", ICON_WIDTH);
+        setIconCharacterRow(icon[1], "       #O##O#       ", ICON_WIDTH);
+        setIconCharacterRow(icon[2], "       ######       ", ICON_WIDTH);
+        setIconCharacterRow(icon[3], "     ##########     ", ICON_WIDTH);
+        setIconCharacterRow(icon[4], "   ##############   ", ICON_WIDTH);
+        setIconCharacterRow(icon[5], "  ################  ", ICON_WIDTH);
+        setIconCharacterRow(icon[6], " ################## ", ICON_WIDTH);
+        setIconCharacterRow(icon[7], "  ################  ", ICON_WIDTH);
+        setIconCharacterRow(icon[8], "  ################  ", ICON_WIDTH);
+        setIconCharacterRow(icon[9], " ######      ###### ", ICON_WIDTH);
+        
+        setIconColor(icon[1], WHITE, 8, 8);
+        setIconColor(icon[1], WHITE, 11, 11);
+        setIconColor(icon[2], YELLOW, 9, 10);
+        setIconColor(icon[4], WHITE, 6, 13);
+        setIconColor(icon[5], WHITE, 5, 14);
+        setIconColor(icon[6], WHITE, 4, 15);
+        setIconColor(icon[7], WHITE, 5, 14);
+        setIconColor(icon[8], YELLOW, 2, 6);
+        setIconColor(icon[8], YELLOW, 13, 17);
+        setIconColor(icon[9], YELLOW, 1, 6);
+        setIconColor(icon[9], YELLOW, 13, 19);
+
+        strcpy(os, "Unknown Linux");
+
+        symbolColor = YELLOW;
     }
 
     printIconRow(icon[0], ICON_WIDTH); printf("    \033[%u;%um%s\033[%u;%um@\033[%u;%um%s\n", BOLD, symbolColor, username, REGULAR, WHITE, BOLD, symbolColor, hostname);
