@@ -49,6 +49,6 @@ struct iconStructure {
 
 void setIconCharacterRow(struct iconStructure *, char *, unsigned int);
 void printIconRow(struct iconStructure[], unsigned int);
-void setIconColor(struct iconStructure *, unsigned int, unsigned int, unsigned int)
+void setIconColor(struct iconStructure *, enum colorEnum, unsigned int, unsigned int);
 
 #endif
