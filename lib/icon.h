@@ -31,7 +31,8 @@ enum thicknessEnum {
 };
 
 enum colorEnum {
-    RED = 31,
+    BLACK = 30,
+    RED,
     GREEN,
     YELLOW,
     BLUE,
