@@ -28,6 +28,6 @@ void setIconCharacterRow(struct iconStructure *target, char *source, unsigned in
     unsigned int i;
 
     for (i = 0; i < size; i++) {
-        target->character = source[i];
+        target[i].character = source[i];
     }
 }
