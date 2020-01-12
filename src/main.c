@@ -31,6 +31,7 @@ SOFTWARE.
 #include <sys/utsname.h>
 #include "../lib/lsb_release.h"
 #include "../lib/uptime.h"
+#include "../lib/icon.h"
 
 #define USERNAME_MAX 32
 #define HOSTNAME_MAX 64
@@ -43,18 +44,20 @@ extern int errno;
 int main() {
     char username[USERNAME_MAX + 1];
     char hostname[HOSTNAME_MAX + 1];
-    char icon[ICON_HEIGHT][ICON_WIDTH + 1];
+    struct iconStructure icon[ICON_HEIGHT][ICON_WIDTH] = {0, };
     char os[33];
     char date[30];
     // %Y-%m-%d %A %H:%M:%S
 
-    int i;
+    int i, j;
 
     struct utsname systemNameInformaton;
     struct lsbReleaseStruct lsbRelease;
     struct uptimeStructure uptime;
     struct tm *currentTime;
     time_t rawTime;
+
+    enum colorEnum symbolColor;
 
     if (getlogin_r(username, sizeof(username))) { // if getting username has been failed
         printf("Getting username has been failed\n");
@@ -109,36 +112,46 @@ int main() {
     }
 
     if (!strcmp(lsbRelease.id, "ManjaroLinux")) {
-        strcpy(icon[0], "#############  #####");
-        strcpy(icon[1], "#############  #####");
-        strcpy(icon[2], "#############  #####");
-        strcpy(icon[3], "#####          #####");
-        strcpy(icon[4], "#####  ######  #####");
-        strcpy(icon[5], "#####  ######  #####");
-        strcpy(icon[6], "#####  ######  #####");
-        strcpy(icon[7], "#####  ######  #####");
-        strcpy(icon[8], "#####  ######  #####");
-        strcpy(icon[9], "#####  ######  #####");
+        setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[1], "#############  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[2], "#############  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[3], "#####          #####", ICON_WIDTH);
+        setIconCharacterRow(icon[4], "#####  ######  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[5], "#####  ######  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[6], "#####  ######  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[7], "#####  ######  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[8], "#####  ######  #####", ICON_WIDTH);
+        setIconCharacterRow(icon[9], "#####  ######  #####", ICON_WIDTH);
+        
+        for (i = 0; i < ICON_HEIGHT; i++) {
+            for (j = 0; j < ICON_WIDTH; j++) {
+                icon[i][j].color = GREEN;
+                icon[i][j].thickness = BOLD;
+            }
+        }
 
         strcpy(os, "Manjaro Linux");
+
+        symbolColor = GREEN;
     }
 
-    printf("%s    %s@%s\n", icon[0], username, hostname);
-    printf("%s   ", icon[1]);
+    printIconRow(icon[0], ICON_WIDTH); printf("    \033[%u;%um%s\033[%u;%um@\033[%u;%um%s\n", BOLD, symbolColor, username, REGULAR, WHITE, BOLD, symbolColor, hostname);
+    printIconRow(icon[1], ICON_WIDTH);printf("   \033[%u;%um", BOLD, WHITE);
     for (i = strlen(username) + 1 + strlen(hostname) + 2; i != 0; i--) {
         //       username       @       hostname   front and end
         putchar('-');
     }
     putchar('\n');
 
-    printf("%s    OS       | %s %s ( %s ) %s\n", icon[2], os, lsbRelease.release, lsbRelease.codename, systemNameInformaton.machine);
-    printf("%s    OS Type  | %s\n", icon[3], systemNameInformaton.sysname);
-    printf("%s    Kernel   | %s\n", icon[4], systemNameInformaton.release);
-    printf("%s    Home     | %s\n", icon[5], getenv("HOME"));
-    printf("%s    Shell    | %s\n", icon[6], getenv("SHELL"));
-    printf("%s    Terminal | %s\n", icon[7], getenv("TERM"));
-    printf("%s    Time     | %s\n", icon[8], date);
-    printf("%s    Uptime   | %u day%s, %u hour%s, %u minute%s, %u second%s\n", icon[9], uptime.days, uptime.days > 1 ? "s" : "", uptime.hours, uptime.hours > 1 ? "s" : "", uptime.minutes, uptime.minutes > 1 ? "s" : "", uptime.seconds, uptime.seconds > 1 ? "s" : "");
-    
+    printIconRow(icon[2], ICON_WIDTH); printf("    \033[%u;%umOS       \033[%u;%um| \033[%u;%um%s %s ( %s ) %s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, os, lsbRelease.release, lsbRelease.codename, systemNameInformaton.machine);
+    printIconRow(icon[3], ICON_WIDTH); printf("    \033[%u;%umOS Type  \033[%u;%um| \033[%u;%um%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, systemNameInformaton.sysname);
+    printIconRow(icon[4], ICON_WIDTH); printf("    \033[%u;%umKernel   \033[%u;%um| \033[%u;%um%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, systemNameInformaton.release);
+    printIconRow(icon[5], ICON_WIDTH); printf("    \033[%u;%umHome     \033[%u;%um| \033[%u;%um%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, getenv("HOME"));
+    printIconRow(icon[6], ICON_WIDTH); printf("    \033[%u;%umShell    \033[%u;%um| \033[%u;%um%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, getenv("SHELL"));
+    printIconRow(icon[7], ICON_WIDTH); printf("    \033[%u;%umTerminal \033[%u;%um| \033[%u;%um%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, getenv("TERM"));
+    printIconRow(icon[8], ICON_WIDTH); printf("    \033[%u;%umTime     \033[%u;%um| \033[%u;%um%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, date);
+    printIconRow(icon[9], ICON_WIDTH); printf("    \033[%u;%umUptime   \033[%u;%um| \033[%u;%um%u day%s, %u hour%s, %u minute%s, %u second%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, uptime.days, uptime.days > 1 ? "s" : "", uptime.hours, uptime.hours > 1 ? "s" : "", uptime.minutes, uptime.minutes > 1 ? "s" : "", uptime.seconds, uptime.seconds > 1 ? "s" : "");
+
     return 0;
 }
