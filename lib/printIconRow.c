@@ -22,30 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef _ICON_H_
-#define _ICON_H_
+#include <stdio.h>
+#include "icon.h"
 
-enum thicknessEnum {
-    REGULAR = 0,
-    BOLD
-};
+void printIconRow(struct iconStructure source[], unsigned int size) {
+    unsigned int i;
 
-enum colorEnum {
-    RED = 31,
-    GREEN,
-    YELLOW,
-    BLUE,
-    MAGENTA,
-    CYAN
-};
-
-struct iconStructure {
-    char character;
-    enum thicknessEnum thickness;
-    enum colorEnum color;
-};
-
-void setIconCharacterRow(struct iconStructure *, char *, unsigned int);
-void printIconRow(struct iconStructure[], unsigned int);
-
-#endif
+    for (i = 0; i < size; i++) {
+        printf("\033[%u;%um%c", source[i].thickness, source[i].color, source[i].character);
+    }
+}
