@@ -189,5 +189,7 @@ int main() {
     printIconRow(icon[8], ICON_WIDTH); printf("    \033[%u;%umTime     \033[%u;%um| \033[%u;%um%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, date);
     printIconRow(icon[9], ICON_WIDTH); printf("    \033[%u;%umUptime   \033[%u;%um| \033[%u;%um%u day%s, %u hour%s, %u minute%s, %u second%s\n", BOLD, symbolColor, BOLD, WHITE, REGULAR, WHITE, uptime.days, uptime.days > 1 ? "s" : "", uptime.hours, uptime.hours > 1 ? "s" : "", uptime.minutes, uptime.minutes > 1 ? "s" : "", uptime.seconds, uptime.seconds > 1 ? "s" : "");
 
+    puts("\033[0m");
+
     return 0;
 }
