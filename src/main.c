@@ -159,6 +159,8 @@ int main() {
         setIconColor(icon[3], RED, 6, 13);
         setIconColor(icon[4], RED, 6, 13);
         setIconColor(icon[6], RED, 1, 18);
+
+        symbolColor = RED;
     } else if (!strcmp(lsbRelease.id, "CentOS")) {
         //                            0123456789ABCDEFGHIJ
         setIconCharacterRow(icon[0], "        ####        ", ICON_WIDTH);
