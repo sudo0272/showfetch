@@ -119,6 +119,7 @@ int main() {
         }
     }
 
+
     if (!strcmp(lsbRelease.id, "ManjaroLinux")) {
         setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
         setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
@@ -158,6 +159,45 @@ int main() {
         setIconColor(icon[3], RED, 6, 13);
         setIconColor(icon[4], RED, 6, 13);
         setIconColor(icon[6], RED, 1, 18);
+    } else if (!strcmp(lsbRelease.id, "CentOS")) {
+        //                            0123456789ABCDEFGHIJ
+        setIconCharacterRow(icon[0], "        ####        ", ICON_WIDTH);
+        setIconCharacterRow(icon[1], "   ##############   ", ICON_WIDTH);
+        setIconCharacterRow(icon[2], "   ##############   ", ICON_WIDTH);
+        setIconCharacterRow(icon[3], "   ##############   ", ICON_WIDTH);
+        setIconCharacterRow(icon[4], "########    ########", ICON_WIDTH);
+        setIconCharacterRow(icon[5], "########    ########", ICON_WIDTH);
+        setIconCharacterRow(icon[6], "   ##############   ", ICON_WIDTH);
+        setIconCharacterRow(icon[7], "   ##############   ", ICON_WIDTH);
+        setIconCharacterRow(icon[8], "   ##############   ", ICON_WIDTH);
+        setIconCharacterRow(icon[9], "        ####        ", ICON_WIDTH);
+
+        setIconColor(icon[0], YELLOW, 8, 11);
+        setIconColor(icon[1], GREEN, 3, 8);
+        setIconColor(icon[1], YELLOW, 9, 10);
+        setIconColor(icon[1], MAGENTA, 11, 16);
+        setIconColor(icon[2], GREEN, 3, 8);
+        setIconColor(icon[2], YELLOW, 9, 10);
+        setIconColor(icon[2], MAGENTA, 11, 16);
+        setIconColor(icon[3], GREEN, 3, 8);
+        setIconColor(icon[3], YELLOW, 9, 10);
+        setIconColor(icon[3], MAGENTA, 11, 16);
+        setIconColor(icon[4], MAGENTA, 0, 7);
+        setIconColor(icon[4], BLUE, 12, 19);
+        setIconColor(icon[5], MAGENTA, 0, 7);
+        setIconColor(icon[5], BLUE, 12, 19);
+        setIconColor(icon[6], BLUE, 3, 8);
+        setIconColor(icon[6], GREEN, 9, 10);
+        setIconColor(icon[6], YELLOW, 11, 16);
+        setIconColor(icon[7], BLUE, 3, 8);
+        setIconColor(icon[7], GREEN, 9, 10);
+        setIconColor(icon[7], YELLOW, 11, 16);
+        setIconColor(icon[8], BLUE, 3, 8);
+        setIconColor(icon[8], GREEN, 9, 10);
+        setIconColor(icon[8], YELLOW, 11, 16);
+        setIconColor(icon[9], GREEN, 8, 11);
+
+        symbolColor = WHITE;
     } else {
         //                            0123456789ABCDEFGHIJ
         setIconCharacterRow(icon[0], "        ####       ", ICON_WIDTH);
