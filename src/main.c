@@ -142,6 +142,22 @@ int main() {
         strcpy(os, "Manjaro Linux");
 
         symbolColor = GREEN;
+    } else if (!strcmp(lsbRelease.id, "RedHatEnterpriseServer")) {
+        //                            0123456789ABCDEFGHIJ
+        setIconCharacterRow(icon[0], "                    ", ICON_WIDTH);
+        setIconCharacterRow(icon[1], "                    ", ICON_WIDTH);
+        setIconCharacterRow(icon[2], "                    ", ICON_WIDTH);
+        setIconCharacterRow(icon[3], "      ########      ", ICON_WIDTH);
+        setIconCharacterRow(icon[4], "      ########      ", ICON_WIDTH);
+        setIconCharacterRow(icon[5], "     ##########     ", ICON_WIDTH);
+        setIconCharacterRow(icon[6], " ################## ", ICON_WIDTH);
+        setIconCharacterRow(icon[7], "                    ", ICON_WIDTH);
+        setIconCharacterRow(icon[8], "                    ", ICON_WIDTH);
+        setIconCharacterRow(icon[9], "                    ", ICON_WIDTH);
+
+        setIconColor(icon[3], RED, 6, 13);
+        setIconColor(icon[4], RED, 6, 13);
+        setIconColor(icon[6], RED, 1, 18);
     } else {
         //                            0123456789ABCDEFGHIJ
         setIconCharacterRow(icon[0], "        ####       ", ICON_WIDTH);
