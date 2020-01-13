@@ -119,7 +119,6 @@ int main() {
         }
     }
 
-
     if (!strcmp(lsbRelease.id, "ManjaroLinux")) {
         setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
         setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
@@ -200,6 +199,53 @@ int main() {
         setIconColor(icon[9], GREEN, 8, 11);
 
         symbolColor = WHITE;
+    } else if (!strcmp(lsbRelease.id, "Ubuntu")) {
+        //                            0123456789ABCDEFGHIJ
+        setIconCharacterRow(icon[0], "       ______       ", ICON_WIDTH);
+        setIconCharacterRow(icon[1], "    .-'@@@@@@'-.    ", ICON_WIDTH);
+        setIconCharacterRow(icon[2], "  .'@@@@@@@@@(#)'.  ", ICON_WIDTH);
+        setIconCharacterRow(icon[3], " /@@@@@.----.@@@@@\\ ", ICON_WIDTH);
+        setIconCharacterRow(icon[4], ";@@@@@/@@@@@@\\@@@@@;", ICON_WIDTH);
+        setIconCharacterRow(icon[5], "|(#)@@\\@@@@@@/@@@@@|", ICON_WIDTH);
+        setIconCharacterRow(icon[6], ";@@@@@@'____'@@@@@@;", ICON_WIDTH);
+        setIconCharacterRow(icon[7], " \\@@@@@@@@@@@@@@@@/ ", ICON_WIDTH);
+        setIconCharacterRow(icon[8], "  '.@@@@@@@@@(#).'  ", ICON_WIDTH);
+        setIconCharacterRow(icon[9], "    \"\"========\"\"    ", ICON_WIDTH);
+
+        setIconColor(icon[0], RED, 7, 12);
+        setIconColor(icon[1], RED, 4, 15);
+        setIconColor(icon[2], RED, 2, 7);
+        setIconColor(icon[2], WHITE, 8, 11);
+        setIconColor(icon[2], RED, 12, 12);
+        setIconColor(icon[2], WHITE, 13, 15);
+        setIconColor(icon[2], RED, 16, 17);
+        setIconColor(icon[3], RED, 1, 5);
+        setIconColor(icon[3], WHITE, 6, 13);
+        setIconColor(icon[3], RED, 14, 18);
+        setIconColor(icon[4], RED, 0, 4);
+        setIconColor(icon[4], WHITE, 5, 6);
+        setIconColor(icon[4], RED, 7, 12);
+        setIconColor(icon[4], WHITE, 13, 14);
+        setIconColor(icon[4], RED, 15, 19);
+        setIconColor(icon[5], RED, 0, 0);
+        setIconColor(icon[5], WHITE, 1, 3);
+        setIconColor(icon[5], RED, 4, 4);
+        setIconColor(icon[5], WHITE, 5, 6);
+        setIconColor(icon[5], RED, 7, 12);
+        setIconColor(icon[5], WHITE, 13, 14);
+        setIconColor(icon[5], RED, 15, 19);
+        setIconColor(icon[6], RED, 0, 5);
+        setIconColor(icon[6], WHITE, 6, 13);
+        setIconColor(icon[6], RED, 14, 19);
+        setIconColor(icon[7], RED, 1, 6);
+        setIconColor(icon[7], WHITE, 7, 12);
+        setIconColor(icon[7], RED, 13, 18);
+        setIconColor(icon[8], RED, 2, 12);
+        setIconColor(icon[8], WHITE, 13, 15);
+        setIconColor(icon[8], RED, 16, 17);
+        setIconColor(icon[9], RED, 4, 15);
+
+        symbolColor = RED;
     } else {
         //                            0123456789ABCDEFGHIJ
         setIconCharacterRow(icon[0], "        ####       ", ICON_WIDTH);
