@@ -11,7 +11,9 @@ install(TARGETS showfetch
         DESTINATION ${CMAKE_INSTALL_PREFIX}
 )
 
-if (OS STREQUAL "Manjaro")
+if (NOT DEFINED OS)
+    add_definitions(-DOS=0)
+elseif (OS STREQUAL "Manjaro")
     add_definitions(-DOS=1)
 elseif (OS STREQUAL "RHEL")
     add_definitions(-DOS=2)
