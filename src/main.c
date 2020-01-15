@@ -119,7 +119,7 @@ int main() {
         }
     }
 
-    if (!strcmp(lsbRelease.id, "ManjaroLinux")) {
+    #if OS == 1
         setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
         setIconCharacterRow(icon[0], "#############  #####", ICON_WIDTH);
         setIconCharacterRow(icon[1], "#############  #####", ICON_WIDTH);
@@ -142,7 +142,7 @@ int main() {
         strcpy(os, "Manjaro Linux");
 
         symbolColor = GREEN;
-    } else if (!strcmp(lsbRelease.id, "RedHatEnterpriseServer")) {
+    #elif OS == 2
         //                            0123456789ABCDEFGHIJ
         setIconCharacterRow(icon[0], "                    ", ICON_WIDTH);
         setIconCharacterRow(icon[1], "                    ", ICON_WIDTH);
@@ -160,7 +160,7 @@ int main() {
         setIconColor(icon[6], RED, 1, 18);
 
         symbolColor = RED;
-    } else if (!strcmp(lsbRelease.id, "CentOS")) {
+    #elif OS == 3
         //                            0123456789ABCDEFGHIJ
         setIconCharacterRow(icon[0], "        ####        ", ICON_WIDTH);
         setIconCharacterRow(icon[1], "   ##############   ", ICON_WIDTH);
@@ -199,7 +199,7 @@ int main() {
         setIconColor(icon[9], GREEN, 8, 11);
 
         symbolColor = WHITE;
-    } else if (!strcmp(lsbRelease.id, "Ubuntu")) {
+    #elif OS == 4
         //                            0123456789ABCDEFGHIJ
         setIconCharacterRow(icon[0], "       ______       ", ICON_WIDTH);
         setIconCharacterRow(icon[1], "    .-'@@@@@@'-.    ", ICON_WIDTH);
@@ -246,7 +246,7 @@ int main() {
         setIconColor(icon[9], RED, 4, 15);
 
         symbolColor = RED;
-    } else {
+    #elif OS == 0
         //                            0123456789ABCDEFGHIJ
         setIconCharacterRow(icon[0], "        ####       ", ICON_WIDTH);
         setIconCharacterRow(icon[1], "       #O##O#       ", ICON_WIDTH);
@@ -274,7 +274,7 @@ int main() {
         strcpy(os, "Unknown Linux");
 
         symbolColor = YELLOW;
-    }
+    #endif
 
     printIconRow(icon[0], ICON_WIDTH); printf("    \033[%u;%um%s\033[%u;%um@\033[%u;%um%s\n", BOLD, symbolColor, username, REGULAR, WHITE, BOLD, symbolColor, hostname);
     printIconRow(icon[1], ICON_WIDTH);printf("   \033[%u;%um", BOLD, WHITE);
